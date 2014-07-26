@@ -7,9 +7,9 @@
 ## Created: Sat Jul 26 13:38:25 2014 (-0500)
 ## Version: 
 ## Package-Requires: ()
-## Last-Updated: Sat Jul 26 16:19:45 2014 (-0500)
+## Last-Updated: Sat Jul 26 18:29:59 2014 (-0500)
 ##           By: Sergio-Feliciano Mendoza-Barrera
-##     Update #: 6
+##     Update #: 9
 ## URL: 
 ## Doc URL: 
 ## Keywords: 
@@ -91,6 +91,8 @@
 ## 
 ### Code:
 
+######################################################################
+## Download de datasets
 rm(list = ls())                         # Remove all workspace data
 source("dwDataFile.R")                  # Download the dataset
 
@@ -100,7 +102,24 @@ source <-
 
 dwDataFile(fileName, source)                  # Download the dataset
 
+######################################################################
+## Summary analysis of each file
 
+## restData <- read.csv("./data/restaurants.csv")
+## head(restData, n = 3)
+## tail(restData, n = 3)
+## summary(restData)
+## str(restData)
+## quantile(restData$councilDistrict, na.rm = TRUE)
+## quantile(restData$councilDistrict, probs = c(0.5, 0.75, 0.9))
+
+## table(restData$zipCode, useNA = "ifany")
+## table(restData$councilDistrict, restData$zipCode)
+
+## ## Check for missing values
+## sum(is.na(restData$councilDistrict))
+## any(is.na(restData$councilDistrict))
+## all(restData$zipCode > 0)
 
 ######################################################################
 ### run_analysis.R ends here
