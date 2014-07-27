@@ -7,9 +7,9 @@
 ## Created: Sat Jul 26 13:38:25 2014 (-0500)
 ## Version: 
 ## Package-Requires: ()
-## Last-Updated: Sat Jul 26 21:22:16 2014 (-0500)
+## Last-Updated: Sat Jul 26 22:39:27 2014 (-0500)
 ##           By: Sergio-Feliciano Mendoza-Barrera
-##     Update #: 83
+##     Update #: 109
 ## URL: 
 ## Doc URL: 
 ## Keywords: 
@@ -114,6 +114,7 @@ rm(list = ls())                         # Remove all workspace data
 ## features.txt file
 featuresFile <- "./data/features.txt"
 df_features <- read.table(featuresFile, colClasses = "character")
+
 dim(df_features)
 class(df_features)
 head(df_features, n = 3)
@@ -126,6 +127,11 @@ any(is.na(df_features))
 
 ## Subsetting features data frame to obtain a vector of names
 features <- df_features[, 2]
+features <- gsub("()", "", features, fixed = TRUE)
+features <- gsub(",", "_", features, fixed = TRUE)
+features <- gsub("(", "-", features, fixed = TRUE)
+features <- gsub(")", "", features, fixed = TRUE)
+
 class(features)
 length(features)
 head(features, n = 10)
@@ -185,7 +191,7 @@ any(is.na(XTrainData))
 trainData <- cbind(yTrainData, df_subjectTrain, XTrainData, rep("train", nrow(yTrainData)))
 dim(trainData)
 head(trainData[1:10], 1)
-names(trainData) <- c("Training-Labels", "Subject-Train", features, "set-Name")
+names(trainData) <- c("Training-Labels", "Subject", features, "set-Name")
 
 head(trainData[1:ncol(trainData)], 1)                # Sampling result
 head(trainData[1:10], 1)
@@ -247,14 +253,24 @@ any(is.na(XTestData))
 testData <- cbind(yTestData, df_subjectTest, XTestData, rep("test", nrow(yTestData)))
 dim(testData)
 head(testData[1:10], 1)
-names(testData) <- c("Test-Labels", "Subject-Test", features, "set-Name")
+names(testData) <- c("Test-Labels", "Subject", features, "set-Name")
 head(testData[1:ncol(testData)], 1)                # Sampling result
 head(testData[1:10], 1)
 tail(testData[1:ncol(testData)], 1)
 tail(testData[1:10], 1)
 
+######################################################################
+## Merge data training and test dataframes
+head(names(trainData), n = 10)
+head(trainData$Subject, n = 20)
 
+names(testData)
+head(testData$Subject, n = 20)
 
+UCI_HAR_Data_1 <- merge(trainData, testData, by = "Subject", all = TRUE)
+dim(UCI_HAR_Data_1)
+summary(UCI_HAR_Data_1$"set-Name.x")
+summary(UCI_HAR_Data_1$"set-Name.y")
 
 ######################################################################
 ### run_analysis.R ends here
