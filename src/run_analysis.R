@@ -7,9 +7,9 @@
 ## Created: Sat Jul 26 13:38:25 2014 (-0500)
 ## Version: 
 ## Package-Requires: ()
-## Last-Updated: Sun Jul 27 10:41:02 2014 (-0500)
+## Last-Updated: Sun Jul 27 14:07:13 2014 (-0500)
 ##           By: Sergio-Feliciano Mendoza-Barrera
-##     Update #: 232
+##     Update #: 275
 ## URL: 
 ## Doc URL: 
 ## Keywords: 
@@ -423,12 +423,35 @@ rm(totalAccZTestData); rm(fileName); rm(importedData)
 
 ######################################################################
 ## Merge data training and test dataframes
+######################################################################
 
 UCI_HAR_Data <- rbind(trainData, testData)
 rm(testData); rm(trainData)
 
-## Dumping complete dataframe
+## Dumping UCI_HAR_Data dataframe
 dump("UCI_HAR_Data", file = "./data/UCI_HAR_Data.R")
 
+######################################################################
+## Calculating average for each variable and dump in a separated data
+## frame file UCI_HAR_Averages.R
+######################################################################
+
+tmp <- subset(UCI_HAR_Data, select = -setName ) # Subsetting dataframe
+                                        # to eliminate setName factor
+                                        # in order to calculate the
+                                        # mean of each feature
+
+UCI_HAR_Averages <- aggregate(tmp, by = list(tmp$ActivityLabel,
+                                     tmp$SubjectId), FUN = mean, na.rm
+                              = TRUE)   # Grouping by Activity and
+                                        # Subject and calculate the
+                                        # mean of each feature
+
+rm(tmp)                                 # Deleting temporal dataframe
+
+## Dumping UCI_HAR_Averages data frame
+dump("UCI_HAR_Averages", file = "./data/UCI_HAR_Averages.R")
+
+print("   ***   run_analysis.R  DONE!   ***")
 ######################################################################
 ### run_analysis.R ends here
