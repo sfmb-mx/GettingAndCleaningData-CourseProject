@@ -7,9 +7,9 @@
 ## Created: Sat Jul 26 13:38:25 2014 (-0500)
 ## Version: 
 ## Package-Requires: ()
-## Last-Updated: Sat Jul 26 22:39:27 2014 (-0500)
+## Last-Updated: Sun Jul 27 06:18:45 2014 (-0500)
 ##           By: Sergio-Feliciano Mendoza-Barrera
-##     Update #: 109
+##     Update #: 140
 ## URL: 
 ## Doc URL: 
 ## Keywords: 
@@ -115,15 +115,15 @@ rm(list = ls())                         # Remove all workspace data
 featuresFile <- "./data/features.txt"
 df_features <- read.table(featuresFile, colClasses = "character")
 
-dim(df_features)
-class(df_features)
-head(df_features, n = 3)
-tail(df_features, n = 3)
-summary(df_features)
-str(df_features)
-## Check for missing values
-sum(is.na(df_features))
-any(is.na(df_features))
+## dim(df_features)
+## class(df_features)
+## head(df_features, n = 3)
+## tail(df_features, n = 3)
+## summary(df_features)
+## str(df_features)
+## ## Check for missing values
+## sum(is.na(df_features))
+## any(is.na(df_features))
 
 ## Subsetting features data frame to obtain a vector of names
 features <- df_features[, 2]
@@ -132,23 +132,23 @@ features <- gsub(",", "_", features, fixed = TRUE)
 features <- gsub("(", "-", features, fixed = TRUE)
 features <- gsub(")", "", features, fixed = TRUE)
 
-class(features)
-length(features)
-head(features, n = 10)
+## class(features)
+## length(features)
+## head(features, n = 10)
 
 ######################################################################
 ## subject_train.txt file
 subjectTrainFile <- "./data/train/subject_train.txt"
 df_subjectTrain <- read.table(subjectTrainFile, colClasses = "numeric")
-dim(df_subjectTrain)
-class(df_subjectTrain)
-head(df_subjectTrain, n = 3)
-tail(df_subjectTrain, n = 3)
-summary(df_subjectTrain)
-str(df_subjectTrain)
-## Check for missing values
-sum(is.na(df_subjectTrain))
-any(is.na(df_subjectTrain))
+## dim(df_subjectTrain)
+## class(df_subjectTrain)
+## head(df_subjectTrain, n = 3)
+## tail(df_subjectTrain, n = 3)
+## summary(df_subjectTrain)
+## str(df_subjectTrain)
+## ## Check for missing values
+## sum(is.na(df_subjectTrain))
+## any(is.na(df_subjectTrain))
 
 ######################################################################
 ##
@@ -158,15 +158,15 @@ initial <- read.table(yTrainFile, nrows = 100)
 classes <- sapply(initial, class)
 yTrainData <- read.table(yTrainFile, colClasses = classes)
 
-dim(yTrainData)
-class(yTrainData)
-head(yTrainData, n = 3)
-tail(yTrainData, n = 3)
-summary(yTrainData)
-str(yTrainData)
-## Check for missing values
-sum(is.na(yTrainData))
-any(is.na(yTrainData))
+## dim(yTrainData)
+## class(yTrainData)
+## head(yTrainData, n = 3)
+## tail(yTrainData, n = 3)
+## summary(yTrainData)
+## str(yTrainData)
+## ## Check for missing values
+## sum(is.na(yTrainData))
+## any(is.na(yTrainData))
 
 ######################################################################
 ##
@@ -176,27 +176,27 @@ initial <- read.table(XTrainFile, nrows = 100)
 classes <- sapply(initial, class)
 XTrainData <- read.table(XTrainFile, colClasses = classes)
 
-dim(XTrainData)
-class(XTrainData)
-head(XTrainData, n = 3)
-tail(XTrainData, n = 3)
-summary(XTrainData)
-str(XTrainData)
-## Check for missing values
-sum(is.na(XTrainData))
-any(is.na(XTrainData))
+## dim(XTrainData)
+## class(XTrainData)
+## head(XTrainData, n = 3)
+## tail(XTrainData, n = 3)
+## summary(XTrainData)
+## str(XTrainData)
+## ## Check for missing values
+## sum(is.na(XTrainData))
+## any(is.na(XTrainData))
 
 ######################################################################
 ## Assambling data training dataframe
 trainData <- cbind(yTrainData, df_subjectTrain, XTrainData, rep("train", nrow(yTrainData)))
-dim(trainData)
-head(trainData[1:10], 1)
-names(trainData) <- c("Training-Labels", "Subject", features, "set-Name")
+## dim(trainData)
+## head(trainData[1:10], 1)
+names(trainData) <- c("ActivityLabel", "SubjectId", features, "setName")
 
-head(trainData[1:ncol(trainData)], 1)                # Sampling result
-head(trainData[1:10], 1)
-tail(trainData[1:ncol(trainData)], 1)
-tail(trainData[1:10], 1)
+## head(trainData[1:ncol(trainData)], 1)                # Sampling result
+## head(trainData[1:10], 1)
+## tail(trainData[1:ncol(trainData)], 1)
+## tail(trainData[1:10], 1)
 
 ######################################################################
 ##                         Test data set
@@ -204,15 +204,15 @@ tail(trainData[1:10], 1)
 ## subject_test.txt file
 subjectTestFile <- "./data/test/subject_test.txt"
 df_subjectTest <- read.table(subjectTestFile, colClasses = "numeric")
-dim(df_subjectTest)
-class(df_subjectTest)
-head(df_subjectTest, n = 3)
-tail(df_subjectTest, n = 3)
-summary(df_subjectTest)
-str(df_subjectTest)
-## Check for missing values
-sum(is.na(df_subjectTest))
-any(is.na(df_subjectTest))
+## dim(df_subjectTest)
+## class(df_subjectTest)
+## head(df_subjectTest, n = 3)
+## tail(df_subjectTest, n = 3)
+## summary(df_subjectTest)
+## str(df_subjectTest)
+## ## Check for missing values
+## sum(is.na(df_subjectTest))
+## any(is.na(df_subjectTest))
 
 ######################################################################
 ## y_test.txt file
@@ -221,15 +221,15 @@ initial <- read.table(yTestFile, nrows = 100)
 classes <- sapply(initial, class)
 yTestData <- read.table(yTestFile, colClasses = classes)
 
-dim(yTestData)
-class(yTestData)
-head(yTestData, n = 3)
-tail(yTestData, n = 3)
-summary(yTestData)
-str(yTestData)
-## Check for missing values
-sum(is.na(yTestData))
-any(is.na(yTestData))
+## dim(yTestData)
+## class(yTestData)
+## head(yTestData, n = 3)
+## tail(yTestData, n = 3)
+## summary(yTestData)
+## str(yTestData)
+## ## Check for missing values
+## sum(is.na(yTestData))
+## any(is.na(yTestData))
 
 ######################################################################
 ## X_test.txt file
@@ -238,39 +238,70 @@ initial <- read.table(XTestFile, nrows = 100)
 classes <- sapply(initial, class)
 XTestData <- read.table(XTestFile, colClasses = classes)
 
-dim(XTestData)
-class(XTestData)
-head(XTestData, n = 3)
-tail(XTestData, n = 3)
-summary(XTestData)
-str(XTestData)
-## Check for missing values
-sum(is.na(XTestData))
-any(is.na(XTestData))
+## dim(XTestData)
+## class(XTestData)
+## head(XTestData, n = 3)
+## tail(XTestData, n = 3)
+## summary(XTestData)
+## str(XTestData)
+## ## Check for missing values
+## sum(is.na(XTestData))
+## any(is.na(XTestData))
 
 ######################################################################
 ## Assambling data test dataframe
 testData <- cbind(yTestData, df_subjectTest, XTestData, rep("test", nrow(yTestData)))
-dim(testData)
-head(testData[1:10], 1)
-names(testData) <- c("Test-Labels", "Subject", features, "set-Name")
-head(testData[1:ncol(testData)], 1)                # Sampling result
-head(testData[1:10], 1)
-tail(testData[1:ncol(testData)], 1)
-tail(testData[1:10], 1)
+## dim(testData)
+## head(testData[1:10], 1)
+names(testData) <- c("ActivityLabel", "SubjectId", features, "setName")
+## head(testData[1:ncol(testData)], 1)                # Sampling result
+## head(testData[1:10], 1)
+## tail(testData[1:ncol(testData)], 1)
+## tail(testData[1:10], 1)
 
 ######################################################################
 ## Merge data training and test dataframes
 head(names(trainData), n = 10)
-head(trainData$Subject, n = 20)
+head(trainData$SubjectId, n = 20)
 
-names(testData)
-head(testData$Subject, n = 20)
+head(names(testData), n = 10)
+head(testData$SubjectId, n = 20)
 
-UCI_HAR_Data_1 <- merge(trainData, testData, by = "Subject", all = TRUE)
+UCI_HAR_Data_1 <- rbind(trainData, testData)
+
 dim(UCI_HAR_Data_1)
-summary(UCI_HAR_Data_1$"set-Name.x")
-summary(UCI_HAR_Data_1$"set-Name.y")
+summary(UCI_HAR_Data_1$setName)
+
+######################################################################
+## Inertial Signals analysis
+######################################################################
+rm(list = ls())                         # Remove all workspace data
+
+bodyAccXTrainData <- "./data/train/Inertial Signals/body_acc_x_train.txt"
+df_bodyAccXTrain <- read.table(bodyAccXTrainData, colClasses = "numeric")
+
+dim(df_bodyAccXTrain)
+class(df_bodyAccXTrain)
+head(df_bodyAccXTrain, n = 3)
+tail(df_bodyAccXTrain, n = 3)
+summary(df_bodyAccXTrain)
+str(df_bodyAccXTrain)
+## Check for missing values
+sum(is.na(df_bodyAccXTrain))
+any(is.na(df_bodyAccXTrain))
+
+bodyAccXTrainData <- transform(df_bodyAccXTrain, SD=apply(df_bodyAccXTrain,1, sd, na.rm = TRUE))
+dim(bodyAccXTrainData)
+
+bodyAccXTrainData <- cbind(bodyAccXTrainData, rowMeans(df_bodyAccXTrain))
+dim(bodyAccXTrainData)
+tail(names(bodyAccXTrainData))
+
+bodyAccXTrainData <- bodyAccXTrainData[, c(129, 130)]
+names(bodyAccXTrainData) <- c("bodyAccXTrainSD", "bodyAccXTrainMean")
+head(bodyAccXTrainData)
+rm(df_bodyAccXTrain)
+ls()
 
 ######################################################################
 ### run_analysis.R ends here
