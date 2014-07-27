@@ -7,9 +7,9 @@
 ## Created: Sat Jul 26 13:38:25 2014 (-0500)
 ## Version: 
 ## Package-Requires: ()
-## Last-Updated: Sun Jul 27 07:30:20 2014 (-0500)
+## Last-Updated: Sun Jul 27 08:16:36 2014 (-0500)
 ##           By: Sergio-Feliciano Mendoza-Barrera
-##     Update #: 183
+##     Update #: 203
 ## URL: 
 ## Doc URL: 
 ## Keywords: 
@@ -359,8 +359,8 @@ names(bodyGyroZTrainData) <- c("bodyGyroZ-SD", "bodyGyroZ-Mean")
 ## Assambling trainData w bodyAccXTrainData
 ## dim(trainData)
 trainData <- cbind(trainData, bodyGyroZTrainData)
-dim(trainData)
-tail(names(trainData))
+## dim(trainData)
+## tail(names(trainData))
 rm(bodyGyroZTrainData)
 ## ls()
 
@@ -386,8 +386,8 @@ names(totalAccXTrainData) <- c("totalAccX-SD", "totalAccX-Mean")
 ## Assambling trainData w bodyAccXTrainData
 ## dim(trainData)
 trainData <- cbind(trainData, totalAccXTrainData)
-dim(trainData)
-tail(names(trainData))
+## dim(trainData)
+## tail(names(trainData))
 rm(totalAccXTrainData)
 ## ls()
 
@@ -413,8 +413,8 @@ names(totalAccYTrainData) <- c("totalAccY-SD", "totalAccY-Mean")
 ## Assambling trainData w bodyAccXTrainData
 ## dim(trainData)
 trainData <- cbind(trainData, totalAccYTrainData)
-dim(trainData)
-tail(names(trainData))
+## dim(trainData)
+## tail(names(trainData))
 rm(totalAccYTrainData)
 ## ls()
 
@@ -440,11 +440,10 @@ names(totalAccZTrainData) <- c("totalAccZ-SD", "totalAccZ-Mean")
 ## Assambling trainData w bodyAccXTrainData
 ## dim(trainData)
 trainData <- cbind(trainData, totalAccZTrainData)
-dim(trainData)
-tail(names(trainData))
-rm(totalAccZTrainData)
+## dim(trainData)
+## tail(names(trainData))
+rm(totalAccZTrainData);
 ## ls()
-
 
 ######################################################################
 ######################################################################
@@ -508,18 +507,272 @@ names(testData) <- c("ActivityLabel", "SubjectId", features, "setName")
 ## tail(testData[1:ncol(testData)], 1)
 ## tail(testData[1:10], 1)
 
+## ls()
+rm(classes); rm(df_subjectTest); rm(features); rm(fileName)
+rm(importedData); rm(initial); rm(subjectTestFile)
+rm(XTestData); rm(XTestFile); rm(yTestData); rm(yTestFile)
+
+######################################################################
+## Test Inertial Signals analysis
+##
+## body_acc_x_test.txt data file
+fileName <- "./data/test/Inertial Signals/body_acc_x_test.txt"
+importedData <- read.table(fileName, colClasses = "numeric")
+## dim(importedData)
+
+bodyAccXTestData <- transform(importedData, SD=apply(importedData,1, sd, na.rm = TRUE))
+## dim(bodyAccXTestData)
+
+bodyAccXTestData <- cbind(bodyAccXTestData, rowMeans(importedData))
+## dim(bodyAccXTestData)
+## tail(names(bodyAccXTestData))
+
+bodyAccXTestData <- bodyAccXTestData[, c(129, 130)]
+names(bodyAccXTestData) <- c("bodyAccX-SD", "bodyAccX-Mean")
+## head(bodyAccXTestData)
+## rm(importedData); rm(fileName)
+## ls()
+
+## Assambling testData w bodyAccXTestData
+## dim(testData)
+testData <- cbind(testData, bodyAccXTestData)
+## dim(testData)
+## tail(names(testData))
+rm(bodyAccXTestData)
+## ls()
+
+######################################################################
+## body_acc_y_test.txt
+fileName <- "./data/test/Inertial Signals/body_acc_y_test.txt"
+importedData <- read.table(fileName, colClasses = "numeric")
+## dim(importedData)
+
+bodyAccYTestData <- transform(importedData, SD=apply(importedData,1, sd, na.rm = TRUE))
+## dim(bodyAccXTestData)
+
+bodyAccYTestData <- cbind(bodyAccYTestData, rowMeans(importedData))
+## dim(bodyAccXTestData)
+## tail(names(bodyAccXTestData))
+
+bodyAccYTestData <- bodyAccYTestData[, c(129, 130)]
+names(bodyAccYTestData) <- c("bodyAccY-SD", "bodyAccY-Mean")
+## head(bodyAccXTestData)
+## rm(importedData); rm(fileName)
+## ls()
+
+## Assambling testData w bodyAccXTestData
+## dim(testData)
+testData <- cbind(testData, bodyAccYTestData)
+## dim(testData)
+## tail(names(testData))
+rm(bodyAccYTestData)
+## ls()
+
+######################################################################
+## body_acc_z_test.txt file
+fileName <- "./data/test/Inertial Signals/body_acc_z_test.txt"
+importedData <- read.table(fileName, colClasses = "numeric")
+## dim(importedData)
+
+bodyAccZTestData <- transform(importedData, SD=apply(importedData,1, sd, na.rm = TRUE))
+## dim(bodyAccXTestData)
+
+bodyAccZTestData <- cbind(bodyAccZTestData, rowMeans(importedData))
+## dim(bodyAccXTestData)
+## tail(names(bodyAccXTestData))
+
+bodyAccZTestData <- bodyAccZTestData[, c(129, 130)]
+names(bodyAccZTestData) <- c("bodyAccZ-SD", "bodyAccZ-Mean")
+## head(bodyAccXTestData)
+## rm(importedData); rm(fileName)
+## ls()
+
+## Assambling testData w bodyAccXTestData
+## dim(testData)
+testData <- cbind(testData, bodyAccZTestData)
+## dim(testData)
+## tail(names(testData))
+rm(bodyAccZTestData)
+## ls()
+
+######################################################################
+## body_gyro_x_test.txt file
+fileName <- "./data/test/Inertial Signals/body_gyro_x_test.txt"
+importedData <- read.table(fileName, colClasses = "numeric")
+## dim(importedData)
+
+bodyGyroXTestData <- transform(importedData, SD=apply(importedData,1, sd, na.rm = TRUE))
+## dim(bodyAccXTestData)
+
+bodyGyroXTestData <- cbind(bodyGyroXTestData, rowMeans(importedData))
+## dim(bodyAccXTestData)
+## tail(names(bodyAccXTestData))
+
+bodyGyroXTestData <- bodyGyroXTestData[, c(129, 130)]
+names(bodyGyroXTestData) <- c("bodyGyroX-SD", "bodyGyroX-Mean")
+## head(bodyAccXTestData)
+## rm(importedData); rm(fileName)
+## ls()
+
+## Assambling testData w bodyAccXTestData
+## dim(testData)
+testData <- cbind(testData, bodyGyroXTestData)
+## dim(testData)
+## tail(names(testData))
+rm(bodyGyroXTestData)
+## ls()
+
+######################################################################
+## body_gyro_y_test.txt file
+fileName <- "./data/test/Inertial Signals/body_gyro_y_test.txt"
+importedData <- read.table(fileName, colClasses = "numeric")
+## dim(importedData)
+
+bodyGyroYTestData <- transform(importedData, SD=apply(importedData,1, sd, na.rm = TRUE))
+## dim(bodyAccXTestData)
+
+bodyGyroYTestData <- cbind(bodyGyroYTestData, rowMeans(importedData))
+## dim(bodyAccXTestData)
+## tail(names(bodyAccXTestData))
+
+bodyGyroYTestData <- bodyGyroYTestData[, c(129, 130)]
+names(bodyGyroYTestData) <- c("bodyGyroY-SD", "bodyGyroY-Mean")
+## head(bodyAccXTestData)
+## rm(importedData); rm(fileName)
+## ls()
+
+## Assambling testData w bodyAccXTestData
+## dim(testData)
+testData <- cbind(testData, bodyGyroYTestData)
+## dim(testData)
+## tail(names(testData))
+rm(bodyGyroYTestData)
+## ls()
+
+######################################################################
+## body_gyro_z_test.txt file
+fileName <- "./data/test/Inertial Signals/body_gyro_z_test.txt"
+importedData <- read.table(fileName, colClasses = "numeric")
+## dim(importedData)
+
+bodyGyroZTestData <- transform(importedData, SD=apply(importedData,1, sd, na.rm = TRUE))
+## dim(bodyAccXTestData)
+
+bodyGyroZTestData <- cbind(bodyGyroZTestData, rowMeans(importedData))
+## dim(bodyAccXTestData)
+## tail(names(bodyAccXTestData))
+
+bodyGyroZTestData <- bodyGyroZTestData[, c(129, 130)]
+names(bodyGyroZTestData) <- c("bodyGyroZ-SD", "bodyGyroZ-Mean")
+## head(bodyAccXTestData)
+## rm(importedData); rm(fileName)
+## ls()
+
+## Assambling testData w bodyAccXTestData
+## dim(testData)
+testData <- cbind(testData, bodyGyroZTestData)
+## dim(testData)
+## tail(names(testData))
+rm(bodyGyroZTestData)
+## ls()
+
+######################################################################
+## total_acc_x_test.txt file
+fileName <- "./data/test/Inertial Signals/total_acc_x_test.txt"
+importedData <- read.table(fileName, colClasses = "numeric")
+## dim(importedData)
+
+totalAccXTestData <- transform(importedData, SD=apply(importedData,1, sd, na.rm = TRUE))
+## dim(bodyAccXTestData)
+
+totalAccXTestData <- cbind(totalAccXTestData, rowMeans(importedData))
+## dim(bodyAccXTestData)
+## tail(names(bodyAccXTestData))
+
+totalAccXTestData <- totalAccXTestData[, c(129, 130)]
+names(totalAccXTestData) <- c("totalAccX-SD", "totalAccX-Mean")
+## head(bodyAccXTestData)
+## rm(importedData); rm(fileName)
+## ls()
+
+## Assambling testData w bodyAccXTestData
+## dim(testData)
+testData <- cbind(testData, totalAccXTestData)
+## dim(testData)
+## tail(names(testData))
+rm(totalAccXTestData)
+## ls()
+
+######################################################################
+## total_acc_y_test.txt file
+fileName <- "./data/test/Inertial Signals/total_acc_y_test.txt"
+importedData <- read.table(fileName, colClasses = "numeric")
+## dim(importedData)
+
+totalAccYTestData <- transform(importedData, SD=apply(importedData,1, sd, na.rm = TRUE))
+## dim(bodyAccXTestData)
+
+totalAccYTestData <- cbind(totalAccYTestData, rowMeans(importedData))
+## dim(bodyAccXTestData)
+## tail(names(bodyAccXTestData))
+
+totalAccYTestData <- totalAccYTestData[, c(129, 130)]
+names(totalAccYTestData) <- c("totalAccY-SD", "totalAccY-Mean")
+## head(bodyAccXTestData)
+## rm(importedData); rm(fileName)
+## ls()
+
+## Assambling testData w bodyAccXTestData
+## dim(testData)
+testData <- cbind(testData, totalAccYTestData)
+## dim(testData)
+## tail(names(testData))
+rm(totalAccYTestData)
+## ls()
+
+######################################################################
+## total_acc_z_test.txt file
+fileName <- "./data/test/Inertial Signals/total_acc_z_test.txt"
+importedData <- read.table(fileName, colClasses = "numeric")
+## dim(importedData)
+
+totalAccZTestData <- transform(importedData, SD=apply(importedData,1, sd, na.rm = TRUE))
+## dim(bodyAccXTestData)
+
+totalAccZTestData <- cbind(totalAccZTestData, rowMeans(importedData))
+## dim(bodyAccXTestData)
+## tail(names(bodyAccXTestData))
+
+totalAccZTestData <- totalAccZTestData[, c(129, 130)]
+names(totalAccZTestData) <- c("totalAccZ-SD", "totalAccZ-Mean")
+## head(bodyAccXTestData)
+## rm(importedData); rm(fileName)
+## ls()
+
+## Assambling testData w bodyAccXTestData
+## dim(testData)
+testData <- cbind(testData, totalAccZTestData)
+## dim(testData)
+## tail(names(testData))
+rm(totalAccZTestData); rm(fileName); rm(importedData)
+## ls()
+
 ######################################################################
 ## Merge data training and test dataframes
-head(names(trainData), n = 10)
-head(trainData$SubjectId, n = 20)
+## head(names(trainData), n = 10)
+## head(trainData$SubjectId, n = 20)
 
-head(names(testData), n = 10)
-head(testData$SubjectId, n = 20)
+## head(names(testData), n = 10)
+## head(testData$SubjectId, n = 20)
 
-UCI_HAR_Data_1 <- rbind(trainData, testData)
+UCI_HAR_Data <- rbind(trainData, testData)
+rm(testData); rm(trainData)
 
-dim(UCI_HAR_Data_1)
-summary(UCI_HAR_Data_1$setName)
+## Dumping complete dataframe
+dump("UCI_HAR_Data", file = "./data/UCI_HAR_Data.R")
+
+## dim(UCI_HAR_Data_1)
+## summary(UCI_HAR_Data_1$setName)
 
 ######################################################################
 ### run_analysis.R ends here
