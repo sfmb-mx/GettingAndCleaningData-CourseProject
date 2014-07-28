@@ -162,6 +162,63 @@ Anguita. November 2012.
 In order to have a tidy and useful data frame the following steps was taken:
 ----------------------------------------------------------------------------
 
+Unzip HumanActivityRecognitionUsingSmartphones.zip (named by me)
+downloaded from
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+The resulting structure must be the next one:
+
+```R
+.
+├── CodeBook.md
+├── data
+│   ├── README.txt
+│   ├── UCI_HAR_Averages.R
+│   ├── UCI_HAR_Data.R
+│   ├── activity_labels.txt
+│   ├── features.txt
+│   ├── features_info.txt
+│   ├── test
+│   │   ├── Inertial\ Signals
+│   │   │   ├── body_acc_x_test.txt
+│   │   │   ├── body_acc_y_test.txt
+│   │   │   ├── body_acc_z_test.txt
+│   │   │   ├── body_gyro_x_test.txt
+│   │   │   ├── body_gyro_y_test.txt
+│   │   │   ├── body_gyro_z_test.txt
+│   │   │   ├── total_acc_x_test.txt
+│   │   │   ├── total_acc_y_test.txt
+│   │   │   └── total_acc_z_test.txt
+│   │   ├── X_test.txt
+│   │   ├── subject_test.txt
+│   │   └── y_test.txt
+│   └── train
+│       ├── Inertial\ Signals
+│       │   ├── body_acc_x_train.txt
+│       │   ├── body_acc_y_train.txt
+│       │   ├── body_acc_z_train.txt
+│       │   ├── body_gyro_x_train.txt
+│       │   ├── body_gyro_y_train.txt
+│       │   ├── body_gyro_z_train.txt
+│       │   ├── total_acc_x_train.txt
+│       │   ├── total_acc_y_train.txt
+│       │   └── total_acc_z_train.txt
+│       ├── X_train.txt
+│       ├── subject_train.txt
+│       └── y_train.txt
+├── dwDataFile.R
+└── run_analysis
+
+```
+
+In these conditions, run
+
+```R
+source("run_analysis.R")
+```
+in order to recreate the tidy data. Loading from the
+UCI_HAR_Averages.R and can consume many time and resources.
+
 ### Features ###
 
 The text file features.txt is the list of all features and in this
