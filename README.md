@@ -6,7 +6,7 @@ Data science 3 course: Gettting and cleaning data
 --------------------------------------
 
 ** I M P O R T A N T: **
-** run_analysis.R and CodeBook is inside of "src" directory! **
+** run_analysis.R and CodeBook are inside of "src" directory! **
 
 --------------------------------------
 
